@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { NavigationService } from '../services/navigation.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -11,7 +10,7 @@ import { Subscription } from 'rxjs';
   imports: [CommonModule, RouterModule, MatIconModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    @if (showNav()) {
+    @if (navService.showNav()) {
       <nav
       class="fixed md:hidden bottom-4 left-0 right-0 text-muted-foreground mx-auto w-11/12 min-w-fit justify-evenly bg-secondary backdrop-blur-md border-border border px-4 py-2 rounded-xl flex items-center gap-5 z-10"
       >
@@ -34,7 +33,9 @@ import { Subscription } from 'rxjs';
     }
   `,
 })
-export class NavigationComponent implements OnDestroy {
+export class NavigationComponent {
+  constructor(public navService: NavigationService) {}
+  
   protected navList = [
     {
       name: 'dashboard',
@@ -54,16 +55,4 @@ export class NavigationComponent implements OnDestroy {
     },
   ];
 
-  showNav = signal(false);
-  subscription: Subscription;
-  constructor(private navService: NavigationService) {
-    this.subscription = this.navService.showNav.subscribe((val) => {
-      // console.log(val);
-      this.showNav.set(val);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 }

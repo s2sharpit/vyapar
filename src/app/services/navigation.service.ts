@@ -1,21 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
-  showNav: BehaviorSubject<boolean>;
-
-  constructor() {
-    this.showNav = new BehaviorSubject(true);
-  }
+  showNav = signal(true);
 
   hide() {
-    this.showNav.next(false);
+    this.showNav.set(false);
   }
 
   display() {
-    this.showNav.next(true);
+    this.showNav.set(true);
   }
 }

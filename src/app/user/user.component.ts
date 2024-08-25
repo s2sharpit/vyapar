@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { account } from '../../lib/appwrite';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, RouterModule],
   template: `
     <p>
       user works!
       <button mat-flat-button (click)="logout()">Logout</button>
+      <a mat-flat-button routerLink='/login'>Login</a>
     </p>
   `,
 })

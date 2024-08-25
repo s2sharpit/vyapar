@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
         </div>
         @if (user() == '') {
         <form class="grid place-items-center">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Enter Mobile Number</mat-label>
             <input matInput value="+91" #reg />
             <mat-icon matSuffix>help_outline</mat-icon>
@@ -70,10 +70,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.navService.hide();    
+    this.navService.hide();
   }
 
   ngOnDestroy(): void {
-    this.navService.display();    
+    this.navService.display();
   }
 }
