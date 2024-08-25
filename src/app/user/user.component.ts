@@ -11,7 +11,7 @@ import { Router, RouterModule } from '@angular/router';
     <p>
       user works!
       <button mat-flat-button (click)="logout()">Logout</button>
-      <a mat-flat-button routerLink='/login'>Login</a>
+      <!-- <a mat-flat-button routerLink='/login'>Login</a> -->
     </p>
   `,
 })
