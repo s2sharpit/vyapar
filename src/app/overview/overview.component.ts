@@ -5,12 +5,12 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <section class="">
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    <section class="grid md:grid-cols-2">
+    <div class="grid grid-cols-2 gap-4">
       @for (item of overviewList; track $index) {
         <div class="bg-secondary py-1 px-4 rounded-2xl">
-          <small class="font-semibold">{{ item.name }}</small>
-          <h2 class="text-2xl font-bold px-2 py-3 text-primary">{{ item.val }}</h2>
+          <small class="font-medium">{{ item.name }}</small>
+          <h3 class="text-2xl px-2 pt-3 text-primary">{{ item.val }}</h3>
         </div>
       }
       </div>

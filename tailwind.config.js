@@ -1,8 +1,11 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
+const config = {
+  darkMode: ["class"],
   content: [
     "./src/**/*.{html,ts}",
   ],
+  prefix: "",
   theme: {
     extend: {
       colors: {
@@ -11,6 +14,7 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        highlight: "hsl(var(--highlight))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -45,6 +49,9 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      // fontFamily: {
+      //   sans: ["var(--font-sans)", ...fontFamily.sans],
+      // },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -61,5 +68,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
-}
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/container-queries"),
+  ],
+};
+
+export default config;
