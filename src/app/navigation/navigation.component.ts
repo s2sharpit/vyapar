@@ -12,7 +12,7 @@ import { NavigationService } from '../services/navigation.service';
   template: `
     @if (navService.showNav()) {
       <nav
-      class="fixed md:hidden bottom-4 left-0 right-0 text-muted-foreground mx-auto w-11/12 min-w-fit justify-evenly bg-secondary backdrop-blur-md border-border border px-4 py-2 rounded-xl flex items-center gap-5 z-10"
+      class="fixed md:hidden bottom-4 left-0 right-0 text-muted-foreground mx-auto w-11/12 min-w-fit justify-evenly bg-secondary/50 backdrop-blur-md border-border border px-4 py-2 rounded-xl flex items-center gap-5 z-9"
       >
       @for (item of navList; track $index) {
       <a
