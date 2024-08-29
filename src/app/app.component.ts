@@ -9,7 +9,7 @@ import { NavigationService } from './services/navigation.service';
   standalone: true,
   imports: [RouterOutlet, NavigationComponent],
   template: `
-    <main class="min-h-screen bg-background text-muted-foreground antialiased w-11/12 mx-auto py-4 max-md:pb-24">
+    <main class="min-h-screen bg-background text-muted-foreground antialiased w-11/12 mx-auto py-4 max-md:pb-40">
       <router-outlet />
       <app-navigation />
     </main>

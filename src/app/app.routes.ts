@@ -4,6 +4,8 @@ import { CustomersComponent } from './customers/customers.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
+import { CustomerComponent } from './customer/customer.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 export const routes: Routes = [
   {
@@ -30,5 +32,13 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     title: 'Login Page',
+  },
+  {
+    path: 'customers/:id',
+    component: CustomerComponent,
+  },
+  {
+    path: 'invoices/:id',
+    component: InvoiceComponent,
   },
 ];
