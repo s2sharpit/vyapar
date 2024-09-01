@@ -26,7 +26,7 @@ import { AuthService } from '../services/appwrite/auth.service';
         <!-- Customer Information -->
         <div class="float-right">
           <div
-            class="h-24 w-24 rounded-full bg-background flex items-center justify-center overflow-hidden"
+            class="h-20 w-20 rounded-full bg-background flex items-center justify-center overflow-hidden"
           >
             @if (image) {
             <img
@@ -43,10 +43,27 @@ import { AuthService } from '../services/appwrite/auth.service';
         </div>
         <!-- Name and ID -->
         <div class="text-left mb-2">
-          <h3 class="text-2xl font-semibold text-primary">Customer Name {{ paramId }}</h3>
-          <p class="text-sm text-gray-500">
-            ID: <span class="font-medium">123456</span>
-          </p>
+          <h3 class="text-2xl font-semibold text-primary">
+            Customer Name {{ paramId }}
+          </h3>
+          <div class="flex gap-4 items-center">
+            <p class="text-sm text-gray-500">
+              ID: <span class="font-medium">123456</span>
+            </p>
+            <!-- Status -->
+            <div class="">
+              <span
+                [ngClass]="
+                  isactive
+                    ? 'bg-green-100 text-green-700 border-green-400'
+                    : 'bg-red-100 text-red-700 border-red-400'
+                "
+                class="border rounded-full py-1 px-3 text-xs font-semibold"
+              >
+                {{ isactive ? 'Active' : 'Inactive' }}
+              </span>
+            </div>
+          </div>
         </div>
 
         <!-- Other Details -->
@@ -60,20 +77,6 @@ import { AuthService } from '../services/appwrite/auth.service';
           <p class="text-sm text-gray-700">
             Address: <span class="font-medium">123 Main St, City, Country</span>
           </p>
-        </div>
-
-        <!-- Status -->
-        <div class="mt-4">
-          <span
-            [ngClass]="
-              isactive
-                ? 'bg-green-100 text-green-700 border-green-400'
-                : 'bg-red-100 text-red-700 border-red-400'
-            "
-            class="border rounded-full py-1 px-4 text-sm font-semibold"
-          >
-            {{ isactive ? 'Active' : 'Inactive' }}
-          </span>
         </div>
 
         <!-- Edit Button -->
@@ -100,23 +103,18 @@ export class CustomerComponent {
   arr = [1, 2, 3, 4, 5, 6, 7, 6, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1];
   isactive = true;
   image = 'val';
-  
-  
+
   constructor(private auth: AuthService) {
     // this.test();
   }
-  
-  
+
   async test() {
     // console.log(auth.getCurrentUser());
     // console.log(auth.createTeam());
     const val = await this.auth.createTeamMember();
     console.log(val);
-    
+
     // const val = await this.auth.getUserTeamId();
-    // console.log(val?.teams[0].$id); 
+    // console.log(val?.teams[0].$id);
   }
-
-  
-
 }
