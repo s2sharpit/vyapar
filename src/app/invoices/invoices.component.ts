@@ -6,7 +6,7 @@ import { ListviewComponent } from "../listview/listview.component";
   standalone: true,
   imports: [ListviewComponent],
   template: `
-    <app-listview [data]="arr" />
+    <app-listview url="invoices" [data]="arr" />
   `,
 })
 export class InvoicesComponent {

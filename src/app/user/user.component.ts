@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { account } from '../../lib/appwrite';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../services/appwrite/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -10,17 +10,11 @@ import { Router, RouterModule } from '@angular/router';
   template: `
     <p>
       user works!
-      <button mat-flat-button (click)="logout()">Logout</button>
+      <button mat-flat-button (click)="auth.logout()">Logout</button>
       <!-- <a mat-flat-button routerLink='/login'>Login</a> -->
     </p>
   `,
 })
 export class UserComponent {
-  constructor (private router: Router) {}
-
-  async logout() {
-    const result = await account.deleteSession('current');
-    // console.log(result);
-    this.router.navigate(['/login'])
-  }
+  auth: AuthService = inject(AuthService);
 }

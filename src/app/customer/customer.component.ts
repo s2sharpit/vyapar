@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListviewComponent } from '../listview/listview.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/appwrite/auth.service';
 
 @Component({
   selector: 'app-customer',
@@ -41,7 +43,7 @@ import { MatButtonModule } from '@angular/material/button';
         </div>
         <!-- Name and ID -->
         <div class="text-left mb-2">
-          <h3 class="text-2xl font-semibold text-primary">Customer Name</h3>
+          <h3 class="text-2xl font-semibold text-primary">Customer Name {{ paramId }}</h3>
           <p class="text-sm text-gray-500">
             ID: <span class="font-medium">123456</span>
           </p>
@@ -82,7 +84,8 @@ import { MatButtonModule } from '@angular/material/button';
         </div>
       </div>
 
-      <app-listview title="customer's invoices" [data]="arr" />
+      <app-listview title="customer's invoices" url="invoices" [data]="arr" />
+
       <div class="fixed bottom-24 right-4">
         <button mat-fab aria-label="Add new Invoice">
           <mat-icon>add</mat-icon>
@@ -92,7 +95,28 @@ import { MatButtonModule } from '@angular/material/button';
   `,
 })
 export class CustomerComponent {
+  route: ActivatedRoute = inject(ActivatedRoute);
+  paramId = Number(this.route.snapshot.params['id']);
   arr = [1, 2, 3, 4, 5, 6, 7, 6, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1];
   isactive = true;
   image = 'val';
+  
+  
+  constructor(private auth: AuthService) {
+    // this.test();
+  }
+  
+  
+  async test() {
+    // console.log(auth.getCurrentUser());
+    // console.log(auth.createTeam());
+    const val = await this.auth.createTeamMember();
+    console.log(val);
+    
+    // const val = await this.auth.getUserTeamId();
+    // console.log(val?.teams[0].$id); 
+  }
+
+  
+
 }

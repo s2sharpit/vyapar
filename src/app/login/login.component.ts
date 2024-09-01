@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { account, ID } from '../../lib/appwrite';
 import { NavigationService } from '../services/navigation.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/appwrite/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -32,41 +32,29 @@ import { Router } from '@angular/router';
             Get OTP
           </button>
         </form>
-        } @else if(session().length === 0) {
+        } @else {
         <form>
           <mat-form-field class="grid place-items-center">
             <mat-label>Enter OTP</mat-label>
             <input matInput type="text" #log />
           </mat-form-field>
-          <button mat-flat-button type="button" (click)="login(log.value)">
+          <button mat-flat-button type="button" (click)="auth.login(log.value)">
             Login
           </button>
         </form>
-        } @else {
-        <li>Hii {{ session().name }}</li>
         }
       </div>
     </main>
   `,
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  constructor(private navService: NavigationService, private router: Router) {}
-
+  auth: AuthService = inject(AuthService);
   user = signal('');
-  session: any = signal([]);
 
-  async register(val: string) {
-    // console.log('reg', val);
-    const token = await account.createPhoneToken(ID.unique(), val);
-    const userId = token.userId;
-    this.user.set(userId);
-  }
+  constructor(private navService: NavigationService) {}
 
-  async login(val: string) {
-    // console.log('log', val);
-    const session = await account.createSession(this.user(), val);
-    this.session.set(session);
-    this.router.navigate(['/']);
+  async register(phoneId: string) {
+    this.user.set(String(await this.auth.register(phoneId)));
   }
 
   ngOnInit(): void {

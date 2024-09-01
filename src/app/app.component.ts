@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
-import { account } from '../lib/appwrite';
-import { NavigationService } from './services/navigation.service';
+import { AuthService } from './services/appwrite/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +17,9 @@ import { NavigationService } from './services/navigation.service';
 
 export class AppComponent {
   title = 'vyapar';
-
-  constructor(private router:Router) {}
+  auth: AuthService = inject(AuthService);
 
   // async ngOnInit() {
-  //   try {
-  //     await account.get();
-  //   } catch(err) {
-  //     this.router.navigate(['/login']);
-  //   }
+  //   this.auth.getCurrentUser();
   // }
 }

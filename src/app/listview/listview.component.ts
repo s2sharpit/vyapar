@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-listview',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule, RouterModule],
   template: `
     <main class="grid gap-4">
       <h3 class="text-primary text-xl font-medium pb-1 border-b capitalize">{{ title ?? headerVal }}</h3>
@@ -19,10 +19,10 @@ import { ActivatedRoute, Router } from '@angular/router';
       </form>
       <section class="bg-secondary divide-y-2 divide-background rounded-2xl shadow-md">
         @for (item of data; track $index) {
-          <a class="flex gap-4 py-2 px-4 items-center">
+          <a [routerLink]="['/', url, item]" class="flex gap-4 py-2 px-4 items-center">
             <div class="h-9 w-9 bg-background rounded-full"></div>
             <div class="grid ">
-              <h6 class="text-primary">Cutomer name</h6>
+              <h6 class="text-primary">Cutomer name {{ item }}</h6>
               <small class="">9876543210</small>
             </div>
           </a>
@@ -34,6 +34,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListviewComponent {
   @Input() title?: string;
   @Input() data: any;
+  @Input() url: any;
   headerVal = ''
   constructor(private route: ActivatedRoute) {
     this.headerVal = this.route.snapshot.url.map((segment) => segment.path).join('/'); 

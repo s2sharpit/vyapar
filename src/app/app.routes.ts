@@ -6,6 +6,7 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { CustomerComponent } from './customer/customer.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { TeamInviteComponent } from './team-invite/team-invite.component';
 
 export const routes: Routes = [
   {
@@ -40,5 +41,9 @@ export const routes: Routes = [
   {
     path: 'invoices/:id',
     component: InvoiceComponent,
+  },
+  {
+    path: 'team-invite',
+    component: TeamInviteComponent,
   },
 ];

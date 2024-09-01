@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-invoice',
@@ -6,11 +7,13 @@ import { Component } from '@angular/core';
   imports: [],
   template: `
     <p>
-      invoice works!
+      invoice works! {{paramId}}
     </p>
   `,
   styles: ``
 })
 export class InvoiceComponent {
-
+  route: ActivatedRoute = inject(ActivatedRoute);
+  paramId = Number(this.route.snapshot.params['id']);
+  
 }
